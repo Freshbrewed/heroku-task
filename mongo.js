@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const mongoose = require('mongoose')
 
 if ( process.argv.length < 3 ) {
@@ -17,10 +18,10 @@ const number = process.argv[4]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-zeazc.mongodb.net/phonebook?retryWrites=true&w=majority`
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true})
-.catch(error => {
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .catch(error => {
     console.log('THIS IS ERROR', error)
-})
+  })
 
 const personSchema = new mongoose.Schema({
   name: String,
@@ -34,7 +35,6 @@ const person = new Person({
   number: number
 })
 
-
 if ( process.argv.length === 3) {
   console.log('Phonebook:')
   Person.find({}).then(result => {
@@ -45,8 +45,8 @@ if ( process.argv.length === 3) {
   })
 }
 
-if ( name != null && number != null) {
-  person.save().then(response => {
+if ( name !== null && number !== null) {
+  person.save().then(() => {
     console.log(`Added ${name} number ${number} to phonebook`)
     mongoose.connection.close()
   })
